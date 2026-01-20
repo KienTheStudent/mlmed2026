@@ -1,6 +1,7 @@
-USTH Machine Learning in Medicine 2026
-==================================
+# USTH Machine Learning in Medicine 2026
 
-* Your name here
-* Your ID here
-* Your team ID here
+* Ngo Xuan Kien
+* 23BI14239
+
+3
+
