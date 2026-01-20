@@ -2,6 +2,4 @@
 
 * Ngo Xuan Kien
 * 23BI14239
-
-3
-
+* 3
