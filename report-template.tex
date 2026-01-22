@@ -1,32 +1,39 @@
 \documentclass[conference]{IEEEtran}
+
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs}
 
-\title{ECG Heartbeat}
+\title{ML Medicine: Labwork Report}
 \author{Ngo Xuan Kien}
 
 \begin{document}
 
 \maketitle
 
-\section{Introduction}
+\section{Labwork 1: ECG Heartbeat}
+
+\subsection{Introduction}
+
 The dataset utilized is the \textbf{ECG Heartbeat Categorization Dataset}, a collection of heartbeat signals sampled at 125Hz. The study combines four CSV files, resulting in a total of 123,998 samples. Each sample contains 188 columns: 187 time-series features and one target label.
 
-\section{Preprocessing and Methodology}
+\subsection{Preprocessing and Methodology}
+
 To ensure a robust baseline, the following steps were taken:
+
 \begin{itemize}
     \item \textbf{Data Partitioning:} A \texttt{train\_test\_split} and \texttt{stratify} were used to maintain class distribution between sets.
     \item \textbf{Normalization:} We applied \texttt{StandardScaler} so the Logistic Regression model treats all 187 time-step features with equal weight.
     \item \textbf{Model Configuration:} Logistic Regression was implemented with \texttt{max\_iter=1000} to allow model to find optimal weight.
 \end{itemize}
 
-\section{Results}
+\subsection{Results}
+
 The model achieved a total accuracy of \textbf{84.1\%} but performance varied significantly across the five classes (0--4).
 
 \begin{table}[h]
 \centering
 \caption{Model Performance per Class}
-\begin{tabular}{lccc}
+\begin{tabular}{lcc}
 \toprule
 \textbf{Class} & \textbf{Recall} & \textbf{F1-Score} \\ \midrule
 Class 0 (Normal) & 0.97 & 0.91 \\
@@ -37,7 +44,42 @@ Class 4 & 0.87 & 0.90 \\ \bottomrule
 \end{tabular}
 \end{table}
 
-\section{Discussion}
-While Classes 0 and 4 show high F1-scores (0.91 and 0.9 respectively), Classes 1, 2, and 3 deal with very low recall (0.19, 0.34 and 0.29 respectively). This indicates that the model frequently misses specific abnormal heartbeats, a direct result of significant class imbalance within the dataset.
+\subsection{Discussion}
+
+While Classes 0 and 4 show high F1-scores (0.91 and 0.90 respectively), Classes 1, 2, and 3 exhibit low recall (0.19, 0.34 and 0.29 respectively). This indicates that the model frequently misses specific abnormal heartbeats, a direct result of significant class imbalance within the dataset.
+
+
+\section{Labwork 2: Ultrasound}
+
+\subsection{Introduction}
+
+This labwork introduces a second project using an \textbf{ultrasound-derived tabular dataset} of pre-extracted image features. The prediction target is the image \emph{pixel size (mm)} for each sample.
+
+\subsection{Preprocessing and Methodology}
+
+\begin{itemize}
+    \item \textbf{Features and Target:} Numerical image-level features were used as predictors; the target variable is \texttt{pixel size (mm)}.
+    \item \textbf{Data Split:} The dataset was partitioned using an 80/20 train--test split
+    \item \textbf{Modeling Approach:} LinearRegression is applied
+    \item \textbf{Evaluation:} Mean Absolute Error (MAE) was selected
+\end{itemize}
+
+\subsection{Results}
+
+\begin{table}[h]
+\centering
+\caption{Ultrasound — Outlier Summary}
+\begin{tabular}{lc}
+\toprule
+\textbf{Measure} & \textbf{Value} \\ \midrule
+Number of outliers & 63 \\
+
+MAE & 0.02 \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Discussion}
+
+Labwork 2 uses a linear regression model on ultrasound-derived features to predict pixel size in millimeters. The model achieves a low \textbf{MAE} of \textbf{0.02}, indicating that the predicted values are very close to the true measurements. However, \textbf{63} detected outliers highlights the importance of careful data preprocessing, as linear models can be sensitive to abnormal samples
 
 \end{document}
