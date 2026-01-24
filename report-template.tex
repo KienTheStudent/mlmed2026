@@ -61,7 +61,7 @@ This labwork introduces a second project using an \textbf{ultrasound-derived tab
     \item \textbf{Features and Target:} Numerical image-level features were used as predictors; the target variable is \texttt{pixel size (mm)}.
     \item \textbf{Data Split:} The dataset was partitioned using an 80/20 train--test split
     \item \textbf{Modeling Approach:} LinearRegression is applied
-    \item \textbf{Evaluation:} Mean Absolute Error (MAE) was selected
+    \item \textbf{Evaluation:} Mean Absolute Error (MAE) was selected for evaluating result
 \end{itemize}
 
 \subsection{Results}
@@ -73,13 +73,13 @@ This labwork introduces a second project using an \textbf{ultrasound-derived tab
 \toprule
 \textbf{Measure} & \textbf{Value} \\ \midrule
 Number of outliers & 63 \\
-
-MAE & 0.02 \\ \bottomrule
+MAE (without outliers) & 33.42 \\
+MAE (with outliers) & 29.33 \\ \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Discussion}
 
-Labwork 2 uses a linear regression model on ultrasound-derived features to predict pixel size in millimeters. The model achieves a low \textbf{MAE} of \textbf{0.02}, indicating that the predicted values are very close to the true measurements. However, \textbf{63} detected outliers highlights the importance of careful data preprocessing, as linear models can be sensitive to abnormal samples
+The results show that the linear regression model achieves a \textbf{MAE of 33.42} after removing outliers and a lower \textbf{MAE of 29.33} when outliers are included. This difference indicates that outliers influence the prediction error and can affect the overall performance of the model. The findings suggest that model accuracy is sensitive to data distribution, emphasizing the need to carefully evaluate the impact of outliers when interpreting regression results.
 
 \end{document}
