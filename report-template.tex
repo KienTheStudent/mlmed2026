@@ -82,4 +82,53 @@ MAE (with outliers) & 29.33 \\ \bottomrule
 
 The results show that the linear regression model achieves a \textbf{MAE of 33.42} after removing outliers and a lower \textbf{MAE of 29.33} when outliers are included. This difference indicates that outliers influence the prediction error and can affect the overall performance of the model. The findings suggest that model accuracy is sensitive to data distribution, emphasizing the need to carefully evaluate the impact of outliers when interpreting regression results.
 
+\section{Labwork 3: Segmentation of COVID-19 X-Ray Images}
+
+\subsection{Introduction}
+
+In this labwork, a deep learning pipeline is implemented to perform semantic segmentation on chest X-ray images for COVID-19 infection analysis. The task focuses on pixel-level prediction of lung or infection regions using a convolutional neural network.
+
+\subsection{Dataset and Preprocessing}
+
+The dataset is loaded using a custom Keras \texttt{Sequence} class to enable efficient batch-wise data feeding. Grayscale X-ray images and their corresponding segmentation masks are resized to $256 \times 256$, normalized to the range $[0,1]$, and reshaped to include a single channel.
+
+Data are organized across three classes: COVID-19, Non-COVID, and Normal. However, the segmentation task itself is class-agnostic and focuses solely on region prediction.
+
+\subsection{Model Architecture}
+
+A lightweight U-Net architecture is used for segmentation. The network consists of:
+\begin{itemize}
+    \item An encoder with convolutional and max-pooling layers for feature extraction.
+    \item A bottleneck layer with increased feature depth.
+    \item A decoder with transposed convolutions and skip connections to recover spatial details.
+\end{itemize}
+
+The final layer uses a sigmoid activation function to produce a binary segmentation mask.
+
+\subsection{Training Setup}
+
+The model is trained using the Adam optimizer with binary cross-entropy loss. Training is performed for 50 epochs, with validation data used to monitor generalization performance.
+
+\subsection{Training Results}
+
+\begin{itemize}
+    \item Training started at accuracy $= 0.9585$ and loss $= 0.1117$ (Epoch 1), and ended at accuracy $= 0.9678$ and loss $= 0.0851$ (Epoch 50).
+    \item Validation accuracy ranged from approximately $0.9565$ to a peak of $0.9688$ (Epoch 39). Final validation accuracy was $0.9668$ with a validation loss of $0.0872$. The best observed validation loss was $0.0836$ (Epochs 44 and 48).
+    \item Overall, the training process shows steady improvement and stabilized validation metrics after 20--30 epochs, with no extreme overfitting observed.
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+
+After thresholding predictions at 0.5, the model achieved the following performance:
+\begin{itemize}
+    \item Dice coefficient: $0.9215$
+    \item Intersection over Union (IoU): $0.8636$
+    \item Pixel-wise accuracy: $0.9668$
+\end{itemize}
+
+\subsection{Conclusion}
+
+The U-Net model achieved high pixel-level accuracy and strong overlap metrics (Dice $\approx 0.92$, IoU $\approx 0.86$), indicating reliable segmentation of regions of interest on the validation set. These results suggest that the chosen architecture and preprocessing pipeline are effective for this dataset. Further improvements could be explored through data augmentation, deeper encoder backbones, or loss functions tailored to class imbalance, such as Dice loss.
+
+
 \end{document}
